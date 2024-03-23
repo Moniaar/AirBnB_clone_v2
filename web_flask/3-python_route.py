@@ -18,11 +18,16 @@ def display():
 	return "HBNB"
 
 @app.route("/c/<text>", strict_slashes=False)
+def display_C(text):
+	"""A method to display “C ” followed by the value of the text variable"""
+	text = text.replace("_", " ")
+	return 'C' + text.replace('_', ' ')
+
 @app.route("/python/<text>", strict_slashes=False)
 def display_C(text='is cool'):
-	"""A method to display “python ” followed by the value of the text variable"""
-	text = text.replace("_", " ")
-	return 'python' + text.replace('_', ' ')
+        """A method to display “python” followed by the value of the text variable"""
+        text = text.replace("_", " ")
+        return 'Python' + text.replace('_', ' ')
 
 
 if __name__ == "__main__":
