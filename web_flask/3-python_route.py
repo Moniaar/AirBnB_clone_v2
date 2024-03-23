@@ -21,13 +21,14 @@ def display():
 def display_C(text):
 	"""A method to display “C ” followed by the value of the text variable"""
 	text = text.replace("_", " ")
-	return 'C' + text.replace('_', ' ')
+	return 'C' + text
+
 @app.route("/python", strict_slashes=False)
 @app.route("/python/<text>", strict_slashes=False)
-def display_C(text='is cool'):
+def display_py(text='is cool'):
 	"""A method to display “python” followed by the value of the text variable"""
 	text = text.replace("_", " ")
-	return 'Python' + text.replace('_', ' ')
+	return 'Python' + text
 
 
 if __name__ == "__main__":
