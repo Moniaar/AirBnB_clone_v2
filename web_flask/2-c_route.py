@@ -20,7 +20,7 @@ def display():
 @app.route("/c/<text>", strict_slashes=False)
 def display_C(text):
 	"""A method to display “C ” followed by the value of the text variable"""
-	text = text.replace("_", "")
+	text = text.replace("_", " ")
 	return f'{C, {text}}'
 
 if __name__ == "__main__":
