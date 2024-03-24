@@ -61,14 +61,7 @@ class FileStorage:
             self.__session.query(type(obj)).filter(
                     type(obj).id == obj.id).delete()
 
-    def reload(self):
-        """create all tables in the database"""
-        Base.metadata.create_all(self.__engine)
-        session_factory = sessionmaker(bind=self.__engine,
-                                       expire_on_commit=False)
-        Session = scoped_session(session_factory)
-        self.__session = Session()
-
     def close(self):
-        """Call remove methode on the private session attribute"""
-        self.__session.close()
+        """Call reload method for deserializing the the JSON file to
+        objects"""
+        self.reload()
