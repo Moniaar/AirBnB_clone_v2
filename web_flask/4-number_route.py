@@ -38,11 +38,10 @@ def display_py(text='is cool'):
     return 'Python ' + text
 
 
-@app.route("/number/<n>", strict_slashes=False)
+@app.route("/number/<int:n>", strict_slashes=False)
 def route_numb(n):
     """This is script that starts a Flask web application with numbers"""
-    if n.isdigit():
-        return n + ' is a number'
+    return f'{n} is a number'
 
 
 if __name__ == "__main__":
