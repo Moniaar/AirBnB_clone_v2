@@ -8,7 +8,8 @@ app = Flask(__name__)
 
 @app.route("/", strict_slashes=False)
 def hello_world():
-    """This method is to display a welcome message from the page that is hosted"""
+    """This method is to display a welcome message
+    from the page that is hosted"""
     return "Hello HBNB!"
 
 
