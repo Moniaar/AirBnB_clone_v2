@@ -13,7 +13,8 @@ class FileStorage:
         objs = FileStorage.__objects
         if cls is not None:
             class_name = cls.__name__
-            return {key: objs[key] for key in objs if key.split('.')[0] == class_name}
+            return {key: objs[key] for key in objs if
+                    key.split('.')[0] == class_name}
         else:
             return objs
 
@@ -55,9 +56,19 @@ class FileStorage:
             pass
 
     def delete(self, obj=None):
-        """Deletes obj from __objects if it’s inside"""
-        if obj is None:
-            return
-        deleted_key = f"{obj.to_dict()['__class__']}.{obj.id}"
-        if deleted_key in FileStorage.__objects:
-            del FileStorage.__objects[deleted_key]
+        """delete from the current database session obj if not None"""
+        if obj is not None:
+            self.__session.query(type(obj)).filter(
+                    type(obj).id == obj.id).delete()
+
+    def reload(self):
+        """create all tables in the database"""
+        Base.metadata.create_all(self.__engine)
+        session_factory = sessionmaker(bind=self.__engine,
+                                       expire_on_commit=False)
+        Session = scoped_session(session_factory)
+        self.__session = Session()
+
+    def close(self):
+        """Call remove methode on the private session attribute"""
+        self.__session.close()
